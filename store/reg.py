@@ -1,0 +1,5 @@
+import requests
+# token = 'ya29.a0AfB_byCT5O03WGz8yEOoqOfx9GG3HMz7R1hO4xIIq7wc8MR2m4V-5PfQSBtzflm7EHJyfGDBhE8yrhHVGbUxlOSv_eX5ArwwKuordEkAzd_urR8iZ3115k_T8qhNGqF5di7hporEkoO5WKCj1kaCUJG2p_i9kCn8pmrRaCgYKAWoSARASFQGOcNnC2Mv6uO0mO3DAEwheipyvVA0171'
+token = 'ya29.a0AfB_byCfltKw1sYvSzgOvTMY1e64DbBlVXXWPBEEMLQpL4-EfgM9XApHO3GCPl5ZuxZWEQwxKEe7uukpRgBeQOTOibLN1sI7diYYbQai1-1vBxsMOv71YFl5222Qv8I95Z7pk18yi1NuwINtA6YTVBlUt8rs9xqhBQaCgYKAZYSARASFQGOcNnCKPJaC-FsykAJdtyreu8dIQ0169'
+a = requests.get("http://funders-fundress-a100x2-chat-gpt-01.infra.intema.ai:5000/liveness", headers={"Authorization": f"Bearer {token}"})
+a.json()
