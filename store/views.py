@@ -1,5 +1,5 @@
 """_summary_ """
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from .models import Category, Product
 
@@ -23,6 +23,10 @@ def all_poducts(request):
         request (_type_): _description_
     """
     pass
-    # products = Product.objects.all()
-    products = ['ddd', 'wwww']
+    products = Product.objects.all()
+    # products = ['ddd', 'wwww']
     return render(request, 'store/home.html', {'products': products})
+
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug, in_stock=True)
+    pass
