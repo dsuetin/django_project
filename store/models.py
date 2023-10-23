@@ -1,6 +1,6 @@
 """ Script with with site model description"""
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 
 
