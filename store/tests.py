@@ -2,7 +2,9 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 # Create your tests here.
 from store.models import Category, Product
+from unittest import skip
 
+from django.test import Client
 
 class TestCategoriesModel(TestCase):
     """Test for model category"""
@@ -49,3 +51,25 @@ class TestProductsModel(TestCase):
         """
         data = self.data1
         self.assertEqual(str(data), 'django beginers')
+        
+# @skip("demonstrating skipping")        
+# class TestSkip(TestCase):
+#     def test_skip_example(self):
+#         pass
+    
+#     def test_homepage_url(self):
+#         """
+#         Test homepage response status
+#         """
+#         response = self.Client.get('/')
+        
+        
+class TestViewResponses(TestCase):
+    def setUp(self):
+        self.c = Client()
+    def test_url_allowed_hosts(self):
+        """
+        Test allowed hosts
+        """
+        response = self.c.get('/')
+        self.assertEqual(response.status_code, 200)
