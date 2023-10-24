@@ -39,7 +39,12 @@ class TestProductsModel(TestCase):
     def setUp(self):
         Category(name='django', slug='django')
         User(username='admin')
-        self.data1 = Product(category_id=1, title='django beginers', created_by_id=1, slug='django-beginers', price='20.00', image='imgae_django')
+        self.data1 = Product(category_id=1,
+                             title='django beginers',
+                             created_by_id=1,
+                             slug='django-beginers',
+                             price='20.00',
+                             image='imgae_django')
 
     def test_product_model_entry(self):
         """
@@ -54,17 +59,19 @@ class TestProductsModel(TestCase):
         """
         data = self.data1
         self.assertEqual(str(data), 'django beginers')
-        
-# @skip("demonstrating skipping")        
-# class TestSkip(TestCase):
-#     def test_skip_example(self):
-#         pass
-    
-#     def test_homepage_url(self):
-#         """
-#         Test homepage response status
-#         """
-#         response = self.Client.get('/')             
+
+
+@skip("demonstrating skipping")
+class TestSkip(TestCase):
+    def test_skip_example(self):
+        pass
+
+    def test_homepage_url(self):
+        """
+        Test homepage response status
+        """
+        response = self.Client.get('/')
+        print(response)
 
 
 class TestViewResponses(TestCase):
@@ -86,7 +93,7 @@ class TestViewResponses(TestCase):
         self.assertEqual(response.status_code, 400)
         response = self.c.get('/', HTTP_HOST='mydonain.com')
         self.assertEqual(response.status_code, 400)
-        
+
     def test_product_detail_url(self):
         """
         Test items response status
