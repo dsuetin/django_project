@@ -24,9 +24,8 @@ def all_products(request):
     Args:
         request (_type_): _description_
     """
-    pass
-    products = Product.objects.all()
-    # products = ['ddd', 'wwww']
+    # products = Product.objects.all()
+    products = Product.objects.filter(is_active=True)
     return render(request, 'store/home.html', {'products': products})
 
 
