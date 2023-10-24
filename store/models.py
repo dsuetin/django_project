@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(is_active=True)
 class Category(models.Model):
     """Class representing a category"""
     name = models.CharField(max_length=255, db_index=True)
