@@ -115,7 +115,7 @@ class TestViewResponses(TestCase):
         response = products_all(request)
         html = response.content.decode('utf8')
         print(html)
-        # self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>BikeStore</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
 
@@ -124,6 +124,6 @@ class TestViewResponses(TestCase):
         response = products_all(request)
         html = response.content.decode('utf8')
         print(html)
-        # self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>BikeStore</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
