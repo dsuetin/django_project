@@ -26,10 +26,10 @@
                             <div class="col-6">
                                 <label for="select">Qty</label>
                                 <select id="select">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
 
                             </div>
@@ -46,12 +46,14 @@
 <script>
     $(document).on('click', '#add-button', function (e) {
         e.preventDefault();
+        console.log($('#select option:selected').text());
         $.ajax({
             type: 'POST',
             url: '{% url "basket:basket_add" %}',
             data: {
                 productid: $('#add-button').val(),
-                // productqty: $('#select option:selected').text(),
+                productqty: $('#select option:selected').text(),
+                // productqty: $('#select').val(),
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post'
             },
