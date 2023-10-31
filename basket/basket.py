@@ -21,4 +21,8 @@ class Basket():
             print('Товар уже добавлен в корзину')
         self.session.modified = True
 
-    # def remove(self, product):
+    def __len__(self):
+        """
+        Get the basket data and count qty
+        """
+        return sum(item['qty'] for item in self.basket.values())

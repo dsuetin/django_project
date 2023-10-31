@@ -47,6 +47,7 @@
     $(document).on('click', '#add-button', function (e) {
         e.preventDefault();
         console.log($('#select option:selected').text());
+        console.log('huuiiiii');
         $.ajax({
             type: 'POST',
             url: '{% url "basket:basket_add" %}',
@@ -57,9 +58,10 @@
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post'
             },
-            // success: function (json) {
-            //    document.getElementById("basket-qty").innerHTML = json.qty
-            // },
+            success: function (json) {
+               document.getElementById("basket-qty").innerHTML = json.qty
+                // console.log(json);
+            },
             error: function (xhr, errmsg, err) {}
         });
     })
