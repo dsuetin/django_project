@@ -1,3 +1,9 @@
+"""
+
+"""
+from store.models import Product
+from decimal import Decimal
+
 
 class Basket():
     """
@@ -25,6 +31,23 @@ class Basket():
         self.session.modified = True
         # from django.contrib.sessions.models import Session
         # s = Session.objects.get(pk='fbsljzqwkgm6bk1tkciflde5c18lkn44')
+
+    def __iter__(self):
+        """
+        """
+        product_ids = self.basket.keys()
+        products = Product.product.filter(id__in=product_ids)
+        basket = self.basket.copy()
+
+        for product in products:
+            basket[str(product.id)]['product'] = product
+             
+        for item in basket.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['qty']
+            
+
+
 
     def __len__(self):
         """
