@@ -23,12 +23,13 @@ def basket_add(request):
         product_id = int(request.POST.get('productid'))
         product_qty = int(request.POST.get('productqty'))
         print('product_id', product_id)
+        print('product_qty', product_qty)
         product = get_object_or_404(Product, id=product_id)
         # basketqty = basket.__len__()
         basket.add(product=product, qty=product_qty)
         # basket.add(product=product, qty=basketqty)
-        # 
-        response = JsonResponse({'qty': product_qty})
+        basketqty = basket.__len__()
+        response = JsonResponse({'qty': basketqty})
         print('basket_add response', response)
         # response = {}
         return response

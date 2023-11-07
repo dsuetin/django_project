@@ -12,14 +12,19 @@ class Basket():
     def add(self, product, qty=1):
         """
         """
-        product_id = product.id
-        print('add product_id', product_id)
-        if product_id not in self.basket:           
-            self.basket[product_id] = {'price': float(product.price), 'qty': int(qty)}
-            print('add self.basket[product_id]', self.basket[product_id])
+        product_id = str(product.id)
+        print('add product_id', product_id, self.basket, str(product_id) in self.basket)
+        if product_id in self.basket:
+            self.basket[product_id]['qty'] = qty
         else:
-            print('Товар уже добавлен в корзину')
+            self.basket[product_id] = {'price': str(product.price), 'qty': 
+                                       qty}
+        # self.save()
+        self.session['skey'] = self.basket
+
         self.session.modified = True
+        # from django.contrib.sessions.models import Session
+        # s = Session.objects.get(pk='fbsljzqwkgm6bk1tkciflde5c18lkn44')
 
     def __len__(self):
         """
