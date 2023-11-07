@@ -36,7 +36,7 @@ class Basket():
         """
         """
         product_ids = self.basket.keys()
-        products = Product.product.filter(id__in=product_ids)
+        products = Product.products.filter(id__in=product_ids)
         basket = self.basket.copy()
 
         for product in products:
@@ -45,9 +45,7 @@ class Basket():
         for item in basket.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['qty']
-            
-
-
+            yield item
 
     def __len__(self):
         """

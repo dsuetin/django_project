@@ -42,7 +42,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(blank=True)
     objects = models.Manager()
-    product = ProductManager()
+    products = ProductManager()
 
     class Meta:
         """Class describing product matadata """
