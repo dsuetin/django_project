@@ -33,3 +33,16 @@ def basket_add(request):
         print('basket_add response', response)
         # response = {}
         return response
+
+
+def basket_delete(request):
+    print('basket_delete')
+    basket = Basket(request)
+    if request.POST.get('action') == 'post':
+        product_id = int(request.POST.get('productid'))
+        basket.delete(product_id=product_id)
+
+        response = JsonResponse({'Success': True})
+        return response
+
+

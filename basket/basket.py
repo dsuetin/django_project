@@ -8,6 +8,7 @@ from decimal import Decimal
 class Basket():
     """
     """
+
     def __init__(self, request):
         self.session = request.session
         basket = self.session.get('skey')
@@ -23,12 +24,12 @@ class Basket():
         if product_id in self.basket:
             self.basket[product_id]['qty'] = qty
         else:
-            self.basket[product_id] = {'price': str(product.price), 'qty': 
+            self.basket[product_id] = {'price': str(product.price), 'qty':
                                        qty}
         # self.save()
         self.session['skey'] = self.basket
-
-        self.session.modified = True
+        self.save()
+        # self.session.modified = True
         # from django.contrib.sessions.models import Session
         # s = Session.objects.get(pk='fbsljzqwkgm6bk1tkciflde5c18lkn44')
 
@@ -40,8 +41,8 @@ class Basket():
         basket = self.basket.copy()
 
         for product in products:
-            basket[str(product.id)]['product'] = product
-             
+            basket[str(product.id)]['product3'] = product
+
         for item in basket.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['qty']
@@ -52,3 +53,24 @@ class Basket():
         Get the basket data and count qty
         """
         return sum(item['qty'] for item in self.basket.values())
+
+    def get_total_price(self):
+        """
+        Calculate the total price of the basket
+        """
+        return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
+
+    def delete(self, product_id):
+        """
+        """
+        product_id = str(product_id)
+        print('product_id', type(product_id), product_id)
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
+
+    def save(self):
+        """
+
+        """
+        self.session.modified = True
