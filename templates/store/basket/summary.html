@@ -21,7 +21,8 @@
             <div class="row p-3">
               <div class="col-6">Hardback Book</div>
               <!-- <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }}</span></div> -->
-              <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }} {{ item.qty }}</span></div>
+              <!-- <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }} {{ item.qty }}</span></div> -->
+              <div class="col-6 text-end"><span class="h6 fw-bold">£{{ product.price }} {{ item.qty }}</span></div>
             </div>
           </div>
           <div class="col">
@@ -56,12 +57,13 @@
     {% endwith %}
     {% endfor %}
     <div class="col-12 text-end">
-      <div class="h6 fw-bold">Sub Total: £<span id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</span></div>
+      <div class="h6 fw-bold">Sub Total: £<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
     </div>
   </div>
 </main>
 
 <script>
+    // Delete item from the bascket
     $(document).on('click', '.delete-button', function (e) {
         e.preventDefault();
         var prodid = $(this).data('index');
@@ -72,15 +74,37 @@
             url: '{% url "basket:basket_delete" %}',
             data: {
                 productid: $(this).data('index'),
-                // productid: prodid,
-                // productqty: $('#select option:selected').text(),
-                // productqty: $('#select').val(),
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post'
             },
             success: function (json) {
                 console.log(prodid);
                 $('.product-item[data-index="' + prodid + '"]').remove();
+                document.getElementById("subtotal").innerHTML = json.subtotal;
+                document.getElementById("basket-qty").innerHTML = json.qty;
+            },
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+
+    // Update item 
+    $(document).on('click', '.update-button', function (e) {
+        e.preventDefault();
+        var prodid = $(this).data('index');
+        console.log('update-button', prodid);
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_update" %}',
+            data: {
+                productid: $(this).data('index'),
+                productqty: $('#select' + prodid + ' option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function (json) {
+                console.log(prodid);
+                document.getElementById("basket-qty").innerHTML = json.qty;
+                document.getElementById("subtotal").innerHTML = json.subtotal;
             },
             error: function (xhr, errmsg, err) {}
         });
