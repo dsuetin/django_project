@@ -18,6 +18,7 @@ class Basket():
 
     def add(self, product, qty=1):
         """
+        Add product to basket
         """
         product_id = str(product.id)
         print('add product_id', product_id, self.basket, str(product_id) in self.basket)
