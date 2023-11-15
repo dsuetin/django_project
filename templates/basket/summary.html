@@ -126,8 +126,10 @@
             },
             success: function (json) {
                 console.log(prodid);
+                total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
                 document.getElementById("basket-qty").innerHTML = json.qty;
                 document.getElementById("subtotal").innerHTML = json.subtotal;
+                document.getElementById("total").innerHTML = total;
             },
             error: function (xhr, errmsg, err) {}
         });
