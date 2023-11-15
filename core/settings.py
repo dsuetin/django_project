@@ -136,3 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# for this error comment admin in settings and urls and after migration uncomment
+# django.db.migrations.exceptions.InconsistentMigrationHistory: 
+# Migration admin.0001_initial is applied before its dependency 
+# account.0001_initial on database 'default'.
