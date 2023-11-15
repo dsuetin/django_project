@@ -28,9 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
 
-AUTH_USER_MODEL = "account.UserBase"
-LOGIN_REDIRECT_URL = '/account/dashboard'
-LOGIN_URL = '/account/login/'
+
 
 # Application definition
 
@@ -132,6 +130,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+AUTH_USER_MODEL = "account.UserBase"
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
