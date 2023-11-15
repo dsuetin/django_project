@@ -3,3 +3,4 @@ venv
 media
 .coverage
 db.sqlite3
+*.png

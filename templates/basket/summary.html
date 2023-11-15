@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "../store/base.html" %}
 {% load static %}
 {% block title %}Basket Summary{% endblock %}
 {% block content %}
@@ -20,8 +20,6 @@
           <div class="col border-bottom">
             <div class="row p-3">
               <div class="col-6">Hardback Book</div>
-              <!-- <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }}</span></div> -->
-              <!-- <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }} {{ item.qty }}</span></div> -->
               <div class="col-6 text-end"><span class="h6 fw-bold">£{{ product.price }} {{ item.qty }}</span></div>
             </div>
           </div>

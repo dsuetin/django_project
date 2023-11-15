@@ -7,10 +7,10 @@ from .basket import Basket
 
 
 def basket_summary(request):
-    # basket = Basket(request)
-    # return render(request, 'store/basket/summary.html', {'basket': basket})
+    basket = Basket(request)
+    return render(request, 'basket/summary.html', {'basket': basket})
     # print("request, basket_summary", request)
-    return render(request, 'store/basket/summary.html')
+    # return render(request, 'store/basket/summary.html')
 
 # s = Session.objects.get(pk='wyx1l8hrcsg9a7bugtn8960g40guf72c')
 
