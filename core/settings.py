@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
 
+AUTH_USER_MODEL = "account.UserBase"
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
 
 # Application definition
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'basket',
+    'account',
 ]
 
 MIDDLEWARE = [
