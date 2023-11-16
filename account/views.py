@@ -6,6 +6,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .forms import RegistrationForm
 # from .tokens import account_activation_token
 
+
 def account_register(request):
 
     if request.user.is_authenticated:
@@ -29,3 +30,7 @@ def account_register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
+    else:
+        registerForm = RegistrationForm()
+        return render(request, 'account/registration/register.html', {'form': registerForm})
+
