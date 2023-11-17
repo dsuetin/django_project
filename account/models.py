@@ -38,7 +38,15 @@ class CustomAccountManager(BaseUserManager):
 
 
 class UserBase(AbstractBaseUser, PermissionsMixin):
+    """_summary_
 
+    Args:
+        AbstractBaseUser (_type_): _description_
+        PermissionsMixin (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, unique=True)
@@ -69,4 +77,4 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Accounts"
 
     def __str__(self) -> str:
-        return self.user_name
+        return str(self.user_name)
