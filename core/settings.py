@@ -134,4 +134,5 @@ AUTH_USER_MODEL = "account.UserBase"
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

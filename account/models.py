@@ -49,7 +49,7 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     """
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
-    first_name = models.CharField(max_length=150, unique=True)
+    first_name = models.CharField(max_length=150, blank=True)
     about = models.TextField(_
                              ('about'), max_length=500, blank=True)
     # Delivery details
