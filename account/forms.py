@@ -27,8 +27,7 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_username(self):
         user_name = self.cleaned_data["user_name"].lower()
-        r = UserBase.objects.filter(user_name=user_name)
-        if r.count():
+        if UserBase.objects.filter(user_name=user_name).first():
             raise forms.ValidationError("Sorry, that username is already taken")
         return user_name
 
