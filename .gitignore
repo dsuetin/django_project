@@ -4,3 +4,4 @@ media
 .coverage
 db.sqlite3
 *.png
+account/migrations
