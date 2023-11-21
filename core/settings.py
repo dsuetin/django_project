@@ -134,12 +134,4 @@ AUTH_USER_MODEL = "account.UserBase"
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
-PASSWORD_RESET_TIMEOUT_ADAYS = 2
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# for this error comment admin in settings and urls and after migration uncomment
-# django.db.migrations.exceptions.InconsistentMigrationHistory: 
-# Migration admin.0001_initial is applied before its dependency 
-# account.0001_initial on database 'default'.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

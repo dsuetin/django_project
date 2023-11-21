@@ -1,11 +1,11 @@
-from collections.abc import Mapping
-from typing import Any
+# from collections.abc import Mapping
+# from typing import Any
 from django import forms
-from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
-                                       SetPasswordForm)
-from django.core.files.base import File
-from django.db.models.base import Model
-from django.forms.utils import ErrorList
+# from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
+#                                        SetPasswordForm)
+# from django.core.files.base import File
+# from django.db.models.base import Model
+# from django.forms.utils import ErrorList
 
 from .models import UserBase
 
