@@ -43,6 +43,7 @@ class TestBasketView(TestCase):
 
     def test_basket_delete(self):
         """
+        test for delete product from basket
         """
         response = self.client.post(
             reverse('basket:basket_delete'), {"productid": 2, "action": "post"}, xht=True)
@@ -50,6 +51,7 @@ class TestBasketView(TestCase):
         
     def test_basket_update(self):
         """
+        test for update product quantity in basket
         """
         response = self.client.post(
             reverse('basket:basket_update'), {"productid": 2, "productqty": 1, "action": "post"}, xht=True)
