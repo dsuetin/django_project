@@ -1,8 +1,8 @@
 # from collections.abc import Mapping
 # from typing import Any
 from django import forms
-# from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
-#                                        SetPasswordForm)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
+                                       SetPasswordForm)
 # from django.core.files.base import File
 # from django.db.models.base import Model
 # from django.forms.utils import ErrorList
@@ -10,52 +10,19 @@ from django import forms
 from .models import UserBase
 
 
-# class RegistrationForm(forms.ModelForm):
-#     """
-#     Form for registering a new user account.    
-#     """
-#     user_name = forms.CharField(label='Username', max_length=50, required=True, help_text='Required')
-#     email = forms.EmailField(label='Email', max_length=100, required=True, help_text='Required',
-#                              error_messages={"required": "Sorry, you will need an email"})
-#     password = forms.CharField(label='Password', max_length=100, required=True, widget=forms.PasswordInput)
-#     confirm_password = forms.CharField(label='Confirm Password', max_length=100,
-#                                        required=True, widget=forms.PasswordInput)
+class UserLoginForm(AuthenticationForm):
 
-#     class Meta:
-#         model = UserBase
-#         fields = ('user_name', 'email',)
-
-#     def clean_username(self):
-#         user_name = self.cleaned_data["user_name"].lower()
-#         if UserBase.objects.filter(user_name=user_name).first():
-#             raise forms.ValidationError("Sorry, that username is already taken")
-#         return user_name
-
-#     def clean_confirm_password(self):
-#         cleaned_data = self.cleaned_data
-#         if cleaned_data.get("confirm_password") != cleaned_data.get("password"):
-#             raise forms.ValidationError("Passwords do not match")
-#         return cleaned_data["confirm_password"]
-
-#     def clean_email(self):
-#         email = self.cleaned_data["email"].lower()
-#         if UserBase.objects.filter(email=email).first():
-#             raise forms.ValidationError("Sorry, that email is already taken")
-#         return email
-
-#     def __init__(self, *args, **kwards) -> None:
-#         super().__init__(*args, **kwards)
-#         self.fields["user_name"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "Enter username"})
-#         self.fields["email"].widget.attrs.update({"class": "form-control mb-3",
-#                                                   "placeholder": "Enter email",
-#                                                   'name': 'email',
-#                                                   'id': 'id_email'})
-#         self.fields["password"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "Enter password"})
-#         self.fields["confirm_password"].widget.attrs.update({"class": "form-control mb-3",
-#                                                              "placeholder": "Confirm password"})
-
-
-
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'login-username'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Password',
+            'id': 'login-pwd',
+        }
+    ))
+    
+    
 class RegistrationForm(forms.ModelForm):
 
     user_name = forms.CharField(
@@ -100,3 +67,47 @@ class RegistrationForm(forms.ModelForm):
             {'class': 'form-control mb-3', 'placeholder': 'Password'})
         self.fields['confirm_password'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Repeat Password'})
+        
+
+class UserEditForm(forms.ModelForm):
+
+    email = forms.EmailField(
+        label='Account email (can not be changed)', max_length=200, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}))
+
+    first_name = forms.CharField(
+        label='Username', min_length=4, max_length=50, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Firstname', 'id': 'form-lastname'}))
+
+    class Meta:
+        model = UserBase
+        fields = ('email', 'first_name',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['email'].required = True
+        
+        
+class PwdResetForm(PasswordResetForm):
+
+    email = forms.EmailField(max_length=254, widget=forms.TextInput(
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'form-email'}))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        u = UserBase.objects.filter(email=email)
+        if not u:
+            raise forms.ValidationError(
+                'Unfortunatley we can not find that email address')
+        return email        
+
+    
+class PwdResetConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label='New password', widget=forms.PasswordInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'New Password', 'id': 'form-newpass'}))
+    new_password2 = forms.CharField(
+        label='Repeat password', widget=forms.PasswordInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'New Password', 'id': 'form-new-pass2'}))
+
