@@ -4,20 +4,16 @@
 {% if category %}{{ category.name }}{% else %}Products{% endif %}   
 {% comment %} имя ображается на самой вкладке {% endcomment %}
 {% endblock %}
-{% block content %}
 
+{% block content %}
 
 <main>
   <div class="container">
     <div class="row">
       <div class="album py-5">
-
-
         <div class="pb-3"><h1 class="h3">Popular2</h1></div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
           {% for product in products %}
-
           <div class="col">
             <div class="card border-0">
               <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
@@ -32,16 +28,11 @@
               </div>
             </div>
           </div>
-
           {% endfor %}
-
         </div>
       </div>
     </div>
-
   </div>
-
-
 </main>
 
 {% endblock %}
