@@ -1,8 +1,10 @@
 """Account model"""
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
+from django.core.mail import send_mail
 from django.db import models
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
-from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
 
 
 class CustomAccountManager(BaseUserManager):
@@ -10,6 +12,7 @@ class CustomAccountManager(BaseUserManager):
     Class for account managment
     """
     def create_superuser(self, email, user_name, password, **other_fields):
+        """Create new superuser"""
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('is_active', True)
@@ -22,7 +25,7 @@ class CustomAccountManager(BaseUserManager):
         return self.create_user(email=email, user_name=user_name, password=password, **other_fields)
 
     def create_user(self, email, user_name, password, **other_fields):
-
+        """Create new user"""
         if not email:
             raise ValueError(_('Users must have an email address'))
 
@@ -75,6 +78,16 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "Accounts"
         verbose_name_plural = "Accounts"
+
+    def email_user(self, subject, message):
+        """ function send email to user """
+        send_mail(
+            subject,
+            message,
+            "1@1.com",
+            [self.email],
+            fail_silently=False,
+        )
 
     def __str__(self) -> str:
         return str(self.user_name)
