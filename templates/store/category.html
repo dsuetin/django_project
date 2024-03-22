@@ -1,7 +1,7 @@
 {% extends "../base.html" %}
 {% load static %}
 {% block title %}
-{% if category %}{{ category.name }}{% else %}Products{% endif %}   
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% comment %} имя ображается на самой вкладке {% endcomment %}
 {% endblock %}
 
@@ -11,8 +11,14 @@
   <div class="container">
     <div class="row">
       <div class="album py-5">
-        <div class="pb-3"><h1 class="h3">Popular2</h1></div>
+        <div class="pb-3">
+          <h1 class="h3">Popular2</h1>
+        </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          {% if not products %}
+          <div class="col-12">No products active</div>
+          {% else %}
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
           {% for product in products %}
           <div class="col">
             <div class="card border-0">
@@ -30,6 +36,7 @@
           </div>
           {% endfor %}
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
