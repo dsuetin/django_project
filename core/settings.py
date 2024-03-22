@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y_3(kni9l=bdvos8bv)ifj#@u+)9m_0e5$%%00b7z)hh^8z30s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'basket',
     'account',
     'payment',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -131,9 +132,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+BASKET_SESSION_ID = 'basket'
+
 AUTH_USER_MODEL = "account.UserBase"
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+STRIPE_ENDPOINT_SECRET = 'whsec_fdd50adc5afa7af75fcc9c5f31839828df5f7800f082f18090d65a665b3b43e8'
