@@ -25,7 +25,7 @@ def products_all(request):
         request (_type_): _description_
     """
     # products = Product.objects.all()
-    products = Product.objects.filter(is_active=True)
+    products = Product.products.filter(is_active=True)
     return render(request, 'store/index.html', {'products': products})
 
 
@@ -37,5 +37,5 @@ def product_detail(request, slug):
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     print("category_slug", category_slug)
-    products = Product.objects.filter(category=category, is_active=True)
+    products = Product.products.filter(category=category, is_active=True)
     return render(request, 'store/category.html', {'category': category, 'products': products})
