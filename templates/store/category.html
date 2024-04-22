@@ -1,5 +1,4 @@
 {% extends "../base.html" %}
-{% load static %}
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% comment %} имя ображается на самой вкладке {% endcomment %}
@@ -7,16 +6,23 @@
 
 {% block content %}
 
-<main>
+{% comment %} <main> {% endcomment %}
+  <div class="container" style="max-width: 1000px">
+    <div class="col-12">
+      <h1 class="h2">{{ category.name|title }}</h1>
+    </div>
+    <div class="col-12 d-flex justify-content-between">
+      <div><b>Popular3</b> products purchased</div>
+    </div>
+    <hr />
+  </div>
+
   <div class="container">
     <div class="row">
-      <div class="album py-5">
-        <div class="pb-3">
-          <h1 class="h3">Popular2</h1>
-        </div>
+      <div class="album">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
           {% if not products %}
-          <div class="col-12">No products active</div>
+          <div class="col-12">The currently no products active <a href="{% url 'store:store_home' %}">Home</a></div>
           {% else %}
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
           {% for product in products %}
@@ -40,6 +46,6 @@
       </div>
     </div>
   </div>
-</main>
+{% comment %} </main> {% endcomment %}
 
 {% endblock %}
